@@ -1,0 +1,22 @@
+{
+  "name": "remember",
+  "description": "A package for remembering data",
+  "author": "Craig Odell <odell.craig@gmail.com>",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:odellcraig/Remember.git"
+  },
+  "dependencies": {
+    "express": "4.*",
+    "async": "latest",
+    "mongoose": "latest",
+    "body-parser": "latest",
+    "errorhandler": "latest",
+    "winston": "latest"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "latest"
+  }
+}
