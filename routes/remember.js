@@ -1,50 +1,78 @@
-
 // Notification Routes
 var _rc = require('../controllers/remember');
 var RememberController = new _rc.RememberController();
 var util = require('util');
 var logger = require('winston');
+var url = require('url');
+
+
+// CREATE ************************************************************************************
+app.post('/remember', function(req, res) {
+    logger.info("POST /remember");
+    return postOrPut(req, res);
+});
+
+
+// READ ************************************************************************************
+app.get('/remember', function(req, res) {
+    logger.info("GET /remember");
+    
+    var requestUrl = url.parse(req.url, true);
+    var query = requestUrl.query;
+
+    if (!query || !query.userOid) {
+        logger.warn("Requested items without a user oid. Aborting.");
+        return res.send({error:"Invalid request: must provide userOid in query."});
+    }
+
+    return RememberController.read(query, function(err, dataArray) {
+        if (err) {
+            logger.error(util.inspect(err));
+            return res.send({error: err});
+        }
+        return res.send(JSON.stringify(dataArray));
+    });
+});
+
+
+// UPDATE ************************************************************************************
+app.put('/remember', function(req, res) {
+    logger.info("PUT /remember");
+    return postOrPut(req, res);
+});
 
 // ************************************************************************************
-app.get('/remember', function (req, res) {
-    logger.info("GET /remember");
-    return res.send("some data here");
-    // return RememberController.get(req, req.query.lastDataTime, function (err, newData) {
-    //     if (newData) {
-    //         return RememberController.list(req, req.query.lastDataTime, function (err, notifications) {
-    //             if (err) { util.error('/notifications/updates' + util.inspect(err)); }
-    //             if (notifications) {
-    //                 // Since there was new data, set the lastDataTime to the latest Seen data.... to avoid clock sync wierdness
-    //                 return res.send(JSON.stringify({lastDataTime: getMaxCreatedAt(notifications), notifications: notifications}));
-    //             }
-    //             return res.send(JSON.stringify({lastDataTime: new Date(), notifications:[]}));
-    //         });
-    //     }
+function postOrPut(req, res) {
+    if(!req.body || !req.body.userOid) {
+        logger.warn("Attempted without body or with out userOid. Aborting.");
+        logger.warn("Body: " + JSON.stringify(req.body));
+        return res.send({error: "userOid or body missing."});
+    }
 
-    //     // Otherwise, wait on redis
-    //     var channel = req.user._id+'-notifications';
-    //     redisClient.subscribe(channel);
-    //     var timeout = setTimeout(function (){
-    //         redisClient.unsubscribe(channel);
-    //         redisClient.removeListener('message', redisMessage);
-    //         res.send(JSON.stringify({lastDataTime: new Date(), notifications: []}));
-    //     }, 20000)
+    return RememberController.createOrUpdate(req.body, function(err, createdOrUpdated) {
+        if (err) {
+            logger.error(util.inspect(err));
+            return res.send({error: err});
+        }
+        return res.send(JSON.stringify(createdOrUpdated));
+    });
+}
 
-    //     var redisMessage = function (channel, message) {
-    //         clearTimeout(timeout);
-    //         redisClient.unsubscribe(channel);
-    //         redisClient.removeListener('message', redisMessage);
 
-    //         return RememberController.list(req, req.query.lastDataTime, function (err, notifications) {
-    //             if (err) { util.error('/notifications/updates' + util.inspect(err)); }
-    //             if (notifications) {
-    //                 // Since there was new data, set the lastDataTime to the latest Seen data.... to avoid clock sync wierdness
-    //                 return res.send(JSON.stringify({lastDataTime: getMaxCreatedAt(notifications), notifications: notifications}));
-    //             }
-    //             return res.send(JSON.stringify({lastDataTime: new Date(), notifications:[]}));
-    //         });
-    //     }
-    //     redisClient.on('message', redisMessage);
+// DELETE ************************************************************************************
+app.delete('/remember', function(req, res) {
+    logger.info("DELETE /remember");
+    if(!req.body || !req.body.userOid) {
+        logger.warn("Attempted without body or with out userOid. Aborting.");
+        logger.warn("Body: " + JSON.stringify(req.body));
+        return res.send({error: "userOid or body missing."});
+    }
 
-    //     return RememberController.cleanOldNotifications(req, req.query.lastDataTime);
+    return RememberController.delete(req.body, function(err, deleted) {
+        if (err) {
+            logger.error(util.inspect(err));
+            return res.send({error: err});
+        }
+        return res.send(JSON.stringify(deleted));
+    });
 });
