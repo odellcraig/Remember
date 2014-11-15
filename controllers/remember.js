@@ -8,7 +8,7 @@
 var async = require('async');
 var util = require('util');
 var mongoose = require('mongoose');
-var Remember = require('../models/Remember');
+var Remember = require('../models/remember');
 var helper = require('../helpers/helper');
 var logger = require('winston');
 
