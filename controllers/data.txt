@@ -1,0 +1,50 @@
+{
+    "userOid": "1",
+    "type": "icvi",
+    "name": "Joe Origin",
+    "firstName": "Joe",
+    "lastName": "Origin",
+    "businessName": "Origin Inc.",
+    "address": "111 Origin Ln.",
+    "city": "Origin City",
+    "state": "CO",
+    "zipCode": "80900",
+    "County": "Origin County",
+    "phone": "18000000000",
+    "email": "receiver@r.com",
+    "alternateAddress": "5678 Origin Dr."
+}
+
+{
+    "userOid": "1",
+    "type": "icvi",
+    "name": "Jerry Destination",
+    "firstName": "Jerry",
+    "lastName": "Destination",
+    "businessName": "Destination Inc.",
+    "address": "111 Destination Ln.",
+    "city": "Destination City",
+    "state": "CA",
+    "zipCode": "90900",
+    "County": "Destination County",
+    "phone": "7192014883",
+    "email": "jerry@comcast.com",
+    "alternateAddress": "8890 Destination Dr."
+}
+
+{
+    "userOid": "1",
+    "type": "icvi",
+    "name": "Luke Skywalker",
+    "firstName": "Luke",
+    "lastName": "Skywalker",
+    "businessName": "Skywalker Inc.",
+    "address": "111 Skywalker Ln.",
+    "city": "Skywalker City",
+    "state": "CA",
+    "zipCode": "80922",
+    "County": "Skywalker County",
+    "phone": "9001627278",
+    "email": "iamyourfather@gmail.com",
+    "alternateAddress": "8890 Skywalker Dr."
+}
