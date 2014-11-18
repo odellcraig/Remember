@@ -2,6 +2,7 @@ FROM node
 
 MAINTAINER Craig Odell <odell.craig@gmail.com>
 
+RUN npm update npm -g
 RUN npm install forever -g
 
 ADD . /src
