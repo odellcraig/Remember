@@ -13,11 +13,10 @@ RUN npm install
 # expose app and debugger
 EXPOSE 80
 
-# Setup the environment variables for local (might change this in the future)
-ENV MONGO_URI             mongodb://linksprinter:smm5kerlc6ms69t603b8lrd3ks@rose.mongohq.com:10060/linksprinter-dev
+ENV MONGO_URI             mongodb://localhost/remember
 ENV PORT                  80
+ENV NODE_ENV              production
 
-#TODO Set ENV to production
 #TODO Enable SSL
 
 # Light it up
