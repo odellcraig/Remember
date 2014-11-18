@@ -32,7 +32,7 @@ app.get('/remember', function(req, res) {
         }
         var responseObject = {results: dataArray};
         logger.info("GET /remember returning - " + JSON.stringify(responseObject));
-        return res.jsonp(responseObject)
+        return res.jsonp(responseObject);
     });
 });
 
