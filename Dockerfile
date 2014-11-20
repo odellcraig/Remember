@@ -12,13 +12,13 @@ WORKDIR /src
 RUN npm install
 
 # expose app and debugger
-EXPOSE 80
+EXPOSE 3000
 
-ENV MONGO_URI             mongodb://localhost/remember
-ENV PORT                  80
+ENV MONGO_URI             mongodb
+ENV PORT                  3000
 ENV NODE_ENV              production
 
 #TODO Enable SSL
 
 # Light it up
-CMD [ "forever", "start", "app.js"]
+CMD [ "./start.sh"]
