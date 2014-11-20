@@ -52,6 +52,12 @@ RememberController.prototype.createOrUpdate = function(body, callback) {
         query.createdAt = body.createdAt;
     }
 
+    if (body.name == null || body.name.length == 0) {
+        logger.info("createOrUpdate - attempted update or create of object with out a name. Aborting.");
+        return callback();
+    }
+
+
 
     logger.info("Creating or updating:");
     logger.info(JSON.stringify(body))
