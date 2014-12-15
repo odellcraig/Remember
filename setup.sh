@@ -12,13 +12,13 @@ node-inspector --web-port 8081 &
 
 
 # Docker on mac: https://docs.docker.com/installation/mac/
-# If already installed 
+# If already installed
 
 # Setup Mongo
 # docker run --name mongodb -d mongo
 
 # Launch our docker using the pre-built image
-# docker run -d -i -p 3000:3000 --name remember --link mongodb:mongodb  odellcraig/remember
+# docker run -d -i -p 3000:3000 -e MONGO_URI=mongodb://admin:V9CtmLrHJLAWJ6Q@mongodb/remember --name remember --link mongodb:mongodb  odellcraig/remembere
 
 # To Build:
 # docker build -t "odellcraig/remember" .

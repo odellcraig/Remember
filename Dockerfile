@@ -14,7 +14,6 @@ RUN npm install
 # expose app and debugger
 EXPOSE 3000
 
-ENV MONGO_URI             mongodb
 ENV PORT                  3000
 ENV NODE_ENV              production
 
